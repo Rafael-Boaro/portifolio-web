@@ -333,13 +333,18 @@ export const education: EducationItem[] = [
 
 export const certs: string[] = [
   "CS50’s Introduction to Databases with SQL (Harvard University)",
-  "Bootcamp Santander 2026: Engenharia de Dados & IA (DIO)",
-  "Bootcamp Accenture: Python para Análise e Automação de Dados (DIO)",
-  "Bootcamp Afya: Automação de Dados com IA (DIO)",
-  "Bootcamp Bradesco: GenAI, Dados & Cyber (DIO)",
+  "Bootcamp Santander: Dados com Python e IA - 50h (DIO)",
+  "Bootcamp Accenture: Python para Análise e Automação de Dados - 55h (DIO)",
+  "Bootcamp Afya: Automação de Dados com IA - 51h (DIO)",
+  "Bootcamp Bradesco: GenAI, Dados & Cyber - 52h (DIO)",
   "N8N: Do Zero ao Projeto com IA (UNIP)",
-  "Formação Fundamentos de Inteligência Artificial (DIO)",
+  "Formação Fundamentos de Inteligência Artificial - 10h (DIO)",
   "Introdução à Cibersegurança (Cisco Networking Academy)",
+  "Arquitetura que Sobrevive à IA: O que Nenhum Prompt Constrói (11ª Semana Tecnológica Fatec Mococa)",
+  "Técnicas Atuais Utilizadas na IBM (11ª Semana Tecnológica Fatec Mococa)",
+  "Seleção e Recrutamento na IBM (11ª Semana Tecnológica Fatec Mococa)",
+  "Tecnologia no Comércio e Facilidades Fiscais (11ª Semana Tecnológica Fatec Mococa)",
+  "GIG: A Uberização do Trabalho (11ª Semana Tecnológica Fatec Mococa)",
 ];
 
 export const bootLines: BootLine[] = [
