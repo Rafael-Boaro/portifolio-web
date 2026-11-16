@@ -35,12 +35,6 @@ export const Hero: React.FC = () => {
             value={allProjects.length}
             label="Repositórios documentados"
           />
-          <Stat
-            value={95.57}
-            decimals={2}
-            suffix="%"
-            label="Acurácia classificação MNIST (PyTorch)"
-          />
           <div>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
