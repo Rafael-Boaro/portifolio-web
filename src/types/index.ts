@@ -1,5 +1,5 @@
 export interface ContactLink {
-  id: string;
+  id: "linkedin" | "github" | "email";
   label: string;
   href: string;
 }
@@ -10,6 +10,7 @@ export interface SkillGroup {
 }
 
 export interface FeaturedProject {
+  slug?: string;
   title: string;
   tag: string;
   text: string;

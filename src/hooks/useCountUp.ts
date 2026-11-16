@@ -6,14 +6,11 @@ export function useCountUp(
   decimals: number = 0,
   duration: number = 1100
 ): string | number {
-  const [value, setValue] = useState<number>(0);
   const reduced = useReducedMotion();
+  const [value, setValue] = useState<number>(() => (reduced ? target : 0));
 
   useEffect(() => {
-    if (reduced) {
-      setValue(target);
-      return;
-    }
+    if (reduced) return;
 
     let rafId: number;
     const startTime = performance.now();
@@ -32,5 +29,6 @@ export function useCountUp(
     return () => cancelAnimationFrame(rafId);
   }, [target, duration, reduced]);
 
-  return decimals ? value.toFixed(decimals) : Math.round(value);
+  const resolved = reduced ? target : value;
+  return decimals ? resolved.toFixed(decimals) : Math.round(resolved);
 }
