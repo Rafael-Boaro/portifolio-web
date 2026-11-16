@@ -1,91 +1,10 @@
 import { useState, useEffect } from "react";
+import { SECTION_IDS, contacts, skills, featuredProjects, categories, allProjects, education, certs, bootLines, repoUrl } from "./data/portfolioData";
+
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-/* ================= Dados ================= */
-const GH = "https://github.com/Rafael-Boaro";
-const repo = (slug) => `${GH}/${slug}`;
-const SECTION_IDS = ["competencias", "experiencia", "projetos", "formacao"];
+// Data imported from portfolioData
 
-const contacts = [
-  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/rafael-paolielo-boaro-1414b135a" },
-  { id: "github", label: "GitHub", href: GH },
-  { id: "email", label: "Email", href: "mailto:rafaelboaro7@gmail.com" },
-];
-
-const skills = [
-  { group: "IA & Machine Learning", items: ["Arquitetura RAG", "Prompt Engineering", "Scikit-Learn", "Agentforce"] },
-  { group: "Engenharia de Dados", items: ["Python (Pandas, NumPy)", "SQL (consultas, joins, troubleshooting)", "Pipelines ETL/ELT", "Data Quality (QA)"] },
-  { group: "Automação & Ferramentas", items: ["n8n", "Integração de APIs (Webhooks)", "Docker", "Git/GitHub", "Dashboards Analíticos"] },
-];
-
-const projects = [
-  {
-    title: "Competição Global AI4SDGs",
-    tag: "STAR.VISION e OSE",
-    text: "Liderança técnica (“Código R”) na estruturação de um pipeline de dados inovador com imagens hiperespectrais de satélite para o monitoramento agrícola.",
-    stack: ["R", "Imagens hiperespectrais", "Pipeline de dados"],
-    href: GH,
-  },
-  {
-    title: "Pipeline de Dados & Agente de IA",
-    tag: "Engenharia de Dados + IA Generativa",
-    text: "Evolução de scripts simples a uma arquitetura robusta: exploração de dados em SQLite, pipeline ETL com regras de negócio, deteção de fraudes com Random Forest e SMOTE, e um agente de IA (Gemini) com base de conhecimento privada.",
-    stack: ["Python", "Pandas", "Scikit-Learn", "Gemini API"],
-    href: repo("bootcamp-analise-dados-python"),
-  },
-  {
-    title: "Classificação de Dígitos com Deep Learning",
-    tag: "Rede neural em PyTorch",
-    text: "Rede neural construída do zero em PyTorch: um MLP totalmente conectado que reconhece dígitos manuscritos do MNIST com 95,57% de acurácia em 10 mil imagens nunca vistas no treino.",
-    stack: ["PyTorch", "Deep Learning", "NumPy"],
-    href: repo("classificacao-digitos-mnist-pytorch"),
-  },
-];
-
-const categories = ["Todos", "Dados & IA", "IA & Automação", "Dados & Dashboards", "Front-end", "Segurança"];
-
-const allProjects = [
-  { slug: "bootcamp-analise-dados-python", title: "Portefólio de Engenharia de Dados & IA", category: "Dados & IA", text: "ETL com regras de negócio, deteção de fraudes com Random Forest + SMOTE e um agente de IA (Gemini) com base de conhecimento privada.", stack: ["Python", "SQLite", "Scikit-Learn", "Gemini"] },
-  { slug: "classificacao-digitos-mnist-pytorch", title: "Classificação de Dígitos (MNIST)", category: "Dados & IA", text: "MLP em PyTorch treinado do zero para reconhecer dígitos manuscritos, com 95,57% de acurácia em dados nunca vistos.", stack: ["PyTorch", "Deep Learning"] },
-  { slug: "Fundamentos-de-IA-Generativa-RAG-e-Engenharia-de-Prompts", title: "Fundamentos de RAG e Prompt Engineering", category: "IA & Automação", text: "Estudo aplicado da arquitetura RAG com NotebookLM, mapeando limitações e técnicas de mitigação de alucinações em LLMs.", stack: ["RAG", "NotebookLM", "Prompt Engineering"] },
-  { slug: "landing-pages-ia-experimento", title: "Landing Pages Geradas por IA", category: "IA & Automação", text: "Um único prompt fixo gerou 17 landing pages completas a partir de fichas reais do Google Maps, sem retoques manuais.", stack: ["Prompt Engineering", "GEO/SEO", "HTML/CSS/JS"] },
-  { slug: "Extraindo-Insights-do-Feedback-de-Clientes-Banc-rios", title: "Insights de Feedback de Clientes Bancários", category: "IA & Automação", text: "Prompt que classifica feedbacks por tema, sentimento e urgência, entregando um resumo executivo com ações priorizadas.", stack: ["Prompt Engineering", "Análise de CX"] },
-  { slug: "dio-educador-financeiro-ia-Santander-bootcamp", title: "Educador Financeiro Inteligente", category: "IA & Automação", text: "Proposta de assistente para universitários: rateio de despesas, simulador de metas de poupança e painel visual de gastos.", stack: ["Prompt Engineering", "Educação financeira"] },
-  { slug: "Ia-generativa-video", title: "Avatar CGI com IA Generativa", category: "IA & Automação", text: "Vídeo curto com avatar hiper-realista gerado por IA, unindo geração de imagem, roteiro e sincronia labial.", stack: ["IA Generativa de Imagem", "Lip-sync"] },
-  { slug: "ERP-Sistema-Gestao-BlogRichard", title: "Sistema de Gestão ERP", category: "Dados & Dashboards", text: "Dashboard de KPIs em tempo real, controlo de acessos por perfil (RBAC) e pipeline de validação que sanitiza dados antes de persistir.", stack: ["RBAC", "APIs RESTful", "Dashboard"] },
-  { slug: "finance-ai-dashboard", title: "Finance.AI Dashboard", category: "Dados & Dashboards", text: "Protótipo de painel financeiro com arquitetura assíncrona simulada, validando loading states e contratos de dados prontos para IA.", stack: ["Next.js", "React", "Recharts"] },
-  { slug: "harvard-cs50-sql", title: "CS50 SQL — Harvard", category: "Dados & Dashboards", text: "Modelagem ER, normalização, views, triggers e otimização de consultas com índices, do curso de bancos de dados de Harvard.", stack: ["SQL", "Modelagem ER", "Índices"] },
-  { slug: "planej-ai", title: "Planej.ai", category: "Front-end", text: "Educador financeiro com insights via IA generativa. Arquitetura React com HOCs para estados de loading/erro e componentes puros.", stack: ["React", "TypeScript", "Tailwind v4"] },
-  { slug: "Vitrine-atelie", title: "Ateliê da Paula — Vitrine", category: "Front-end", text: "Vitrine virtual com foco em conversão via WhatsApp, tipagem estrita, imagens lazy-load e estado global com Zustand.", stack: ["React", "TypeScript", "Zustand"] },
-  { slug: "projetofinal-DIO-ransonware", title: "Ransomware Educacional", category: "Segurança", text: "Simulação controlada de criptografia e resgate de arquivos com AES, para demonstrar riscos que a defesa de dados precisa mitigar.", stack: ["Python", "Criptografia AES"] },
-  { slug: "Phishing-Kali-senhs", title: "Simulação de Engenharia Social", category: "Segurança", text: "Exercício de conscientização sobre phishing com Kali Linux, reforçando a importância da autenticação segura.", stack: ["Kali Linux", "Pentest"] },
-];
-
-/* Formação académica (completa) */
-const education = [
-  { period: "previsão de conclusão: dezembro de 2028", title: "Tecnólogo em Análise e Desenvolvimento de Sistemas", school: "FATEC" },
-  { period: "concluído em 2025", title: "Técnico em Informática para a Internet", school: "Etec Prof. Rodolpho José Del Guerra" },
-];
-
-/* Certificações (lista completa) */
-const certs = [
-  "CS50’s Introduction to Databases with SQL (Harvard University)",
-  "Bootcamp Accenture: Python para Análise e Automação de Dados (DIO)",
-  "Bootcamp Afya: Automação de Dados com IA (DIO)",
-  "Bootcamp Bradesco: GenAI, Dados & Cyber (DIO)",
-  "N8N: Do Zero ao Projeto com IA (UNIP)",
-  "Formação Fundamentos de Inteligência Artificial (DIO)",
-  "Introdução à Cibersegurança (Cisco Networking Academy)",
-];
-
-const bootLines = [
-  { p: "$", t: "sessão iniciada: rafael boaro", c: "text-slate-200" },
-  { p: "", t: "import pandas, sqlite3, sklearn", c: "text-slate-500" },
-  { p: "", t: "pipeline etl ................. concluído", c: "text-slate-500" },
-  { p: "", t: "qa de anotações .............. validado", c: "text-slate-500" },
-  { p: "", t: "treino do modelo .............. 95.57%", c: "text-emerald-300" },
-  { p: "$", t: "agente de ia pronto para consultas", c: "text-fuchsia-300" },
-];
 
 /* ================= Hooks ================= */
 function useCountUp(target, decimals = 0, duration = 1100) {
@@ -431,7 +350,7 @@ function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-x-10 gap-y-5">
-          <Stat value={allProjects.length} label="repositórios documentados" />
+          <Stat value={allProjects.length} label="repoUrlsitórios documentados" />
           <Stat value={95.57} decimals={2} suffix="%" label="acurácia em classificação de imagens (MNIST)" />
           <div>
             <div className="flex items-center gap-2">
@@ -555,7 +474,7 @@ function Projects() {
         variants={stagger}
         className="grid gap-5 md:grid-cols-3"
       >
-        {projects.map((p) => (
+        {featuredProjects.map((p) => (
           <motion.a
             key={p.title}
             href={p.href}
@@ -618,7 +537,7 @@ function Projects() {
         {visible.map((p) => (
           <motion.a
             key={p.slug}
-            href={repo(p.slug)}
+            href={repoUrl(p.slug)}
             target="_blank"
             rel="noreferrer"
             variants={fadeUp}

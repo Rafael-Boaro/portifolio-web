@@ -1,0 +1,338 @@
+import {
+  ContactLink,
+  SkillGroup,
+  FeaturedProject,
+  ProjectCategory,
+  ProjectItem,
+  EducationItem,
+  BootLine,
+} from "../types";
+
+export const GITHUB_BASE_URL = "https://github.com/Rafael-Boaro";
+export const repoUrl = (slug: string): string => `${GITHUB_BASE_URL}/${slug}`;
+
+export const SECTION_IDS = [
+  "competencias",
+  "experiencia",
+  "destaques",
+  "repositorios",
+  "formacao",
+];
+
+export const contacts: ContactLink[] = [
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/rafael-paolielo-boaro-1414b135a",
+  },
+  {
+    id: "github",
+    label: "GitHub",
+    href: GITHUB_BASE_URL,
+  },
+  {
+    id: "email",
+    label: "Email",
+    href: "mailto:rafaelboaro7@gmail.com",
+  },
+];
+
+export const skills: SkillGroup[] = [
+  {
+    group: "IA & Machine Learning",
+    items: [
+      "Arquitetura RAG",
+      "Function Calling & Agents",
+      "Prompt Engineering",
+      "Scikit-Learn",
+      "PyTorch",
+      "Modelos Estatísticos (Média Móvel / Suavização Exponencial)",
+    ],
+  },
+  {
+    group: "Engenharia de Dados",
+    items: [
+      "Python (Pandas, NumPy, Statsmodels)",
+      "SQL (PostgreSQL, SQLite, Consultas Avançadas)",
+      "Pipelines ETL/ELT Resilientes",
+      "Data Quality (QA & Auditoria)",
+      "Normalização & Sanitização",
+    ],
+  },
+  {
+    group: "Desenvolvimento & Automação",
+    items: [
+      "Streamlit Dashboards",
+      "React & TypeScript",
+      "Tailwind CSS",
+      "n8n & Integração de Webhooks",
+      "Docker & AWS Serverless",
+      "Git & GitHub Flow",
+    ],
+  },
+];
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    title: "Cofre Estoque Inteligente",
+    tag: "Hackathon Connect 7.0 • IA & Previsão de Demanda",
+    text: "Sistema integrado para cofre refrigerado de medicamentos de alto custo. Previsão de consumo por suavização exponencial e média móvel (seleção por menor MAPE), cálculo de ponto de pedido e estoque de segurança para 95% de nível de serviço, política FEFO e assistente conversacional de IA integrado.",
+    stack: ["Python", "Streamlit", "Statsmodels", "Plotly", "Groq / OpenAI"],
+    href: repoUrl("cofre-estoque-inteligente"),
+    liveUrl: "https://cofre-estoque-inteligente-7uvxcnxc5dhfyr29ifx9vg.streamlit.app/",
+  },
+  {
+    title: "Vendas + IA",
+    tag: "Santander Bootcamp 2026 DIO • ETL & FinAgent",
+    text: "Aplicação analítica completa combinando pipeline de ETL robusto (tolerância a codificações conflitantes, detecção automática de separadores monetários brasileiros/americanos), dashboard executivo interativo com KPIs e agente financeiro (Fin) com function calling determinística e streaming em tempo real.",
+    stack: ["Python", "Streamlit", "Pandas", "Plotly", "OpenAI / Anthropic"],
+    href: repoUrl("vendas-ai"),
+    liveUrl: "https://vendas-ai-bjr7gzhrrkdjsbd6ve6qth.streamlit.app/",
+  },
+  {
+    title: "Monitoramento Agrícola Hiperespectral",
+    tag: "Competição Global AI4SDGs • STAR.VISION & OSE",
+    text: "Liderança técnica na estruturação de um pipeline de engenharia de dados com imagens de satélite hiperespectrais para agricultura de precisão, análise de cobertura e sustentabilidade em larga escala.",
+    stack: ["Python", "R", "Sensoriamento Remoto", "Pipeline de Dados"],
+    href: repoUrl("hyperspectral-crop-monitoring-ai"),
+  },
+  {
+    title: "Classificação de Dígitos com Deep Learning",
+    tag: "Rede Neural em PyTorch • Deep Learning",
+    text: "Rede neural MLP totalmente conectada desenvolvida do zero em PyTorch, alcançando 95,57% de acurácia sobre 10 mil imagens manuscritas inéditas do benchmark MNIST.",
+    stack: ["PyTorch", "Deep Learning", "NumPy", "Visão Computacional"],
+    href: repoUrl("classificacao-digitos-mnist-pytorch"),
+  },
+];
+
+export const categories: ProjectCategory[] = [
+  "Todos",
+  "Dados & IA",
+  "IA & Automação",
+  "Dados & Dashboards",
+  "Front-end",
+  "Segurança",
+];
+
+export const allProjects: ProjectItem[] = [
+  {
+    slug: "cofre-estoque-inteligente",
+    title: "Cofre Estoque Inteligente",
+    category: "Dados & IA",
+    text: "Previsão de demanda, reposição automática FEFO e assistente de IA para cofre refrigerado de medicamentos de alto custo. Publicado em produção.",
+    stack: ["Python", "Streamlit", "Statsmodels", "Plotly", "Groq / OpenAI"],
+    href: repoUrl("cofre-estoque-inteligente"),
+    liveUrl: "https://cofre-estoque-inteligente-7uvxcnxc5dhfyr29ifx9vg.streamlit.app/",
+  },
+  {
+    slug: "vendas-ai",
+    title: "Vendas + IA (FinAgent)",
+    category: "Dados & IA",
+    text: "Pipeline de ETL tolerante a falhas, dashboard interativo e agente financeiro inteligente com function calling e streaming em tempo real.",
+    stack: ["Python", "Streamlit", "Pandas", "Plotly", "OpenAI / Anthropic"],
+    href: repoUrl("vendas-ai"),
+    liveUrl: "https://vendas-ai-bjr7gzhrrkdjsbd6ve6qth.streamlit.app/",
+  },
+  {
+    slug: "bootcamp-analise-dados-python",
+    title: "Engenharia de Dados & IA",
+    category: "Dados & IA",
+    text: "Pipeline ETL com regras de negócio, detecção de fraudes com Random Forest e SMOTE, e agente inteligente com base de conhecimento privada.",
+    stack: ["Python", "SQLite", "Scikit-Learn", "Gemini API"],
+    href: repoUrl("bootcamp-analise-dados-python"),
+  },
+  {
+    slug: "classificacao-digitos-mnist-pytorch",
+    title: "Classificação de Dígitos (MNIST)",
+    category: "Dados & IA",
+    text: "Rede neural MLP em PyTorch treinada do zero para reconhecimento de dígitos manuscritos, com 95,57% de acurácia em teste.",
+    stack: ["PyTorch", "Deep Learning", "NumPy"],
+    href: repoUrl("classificacao-digitos-mnist-pytorch"),
+  },
+  {
+    slug: "hyperspectral-crop-monitoring-ai",
+    title: "Monitoramento Agrícola Hiperespectral",
+    category: "Dados & IA",
+    text: "Estruturação de pipeline analítico de imagens hiperespectrais de satélite para agricultura de precisão na competição global AI4SDGs.",
+    stack: ["Python", "R", "Sensoriamento Remoto"],
+    href: repoUrl("hyperspectral-crop-monitoring-ai"),
+  },
+  {
+    slug: "Fundamentos-de-IA-Generativa-RAG-e-Engenharia-de-Prompts",
+    title: "Fundamentos de RAG e Prompt Engineering",
+    category: "IA & Automação",
+    text: "Estudo aplicado da arquitetura RAG com NotebookLM, mitigação de alucinações e design de prompts corporativos.",
+    stack: ["RAG", "NotebookLM", "Prompt Engineering"],
+    href: repoUrl("Fundamentos-de-IA-Generativa-RAG-e-Engenharia-de-Prompts"),
+  },
+  {
+    slug: "agentes",
+    title: "Agentes Autônomos e Orquestração",
+    category: "IA & Automação",
+    text: "Explorações e frameworks de agentes inteligentes autônomos, orquestração de ferramentas e fluxos cognitivos automatizados.",
+    stack: ["Python", "Multi-Agent", "LangChain", "Prompt Design"],
+    href: repoUrl("agentes"),
+  },
+  {
+    slug: "DIO-step-functions",
+    title: "Workflows Serverless com AWS Step Functions",
+    category: "IA & Automação",
+    text: "Orquestração de microsserviços serverless na AWS integrando Step Functions, Lambda, SQS e monitoramento CloudWatch.",
+    stack: ["AWS Step Functions", "AWS Lambda", "JSON/ASL"],
+    href: repoUrl("DIO-step-functions"),
+  },
+  {
+    slug: "landing-pages-ia-experimento",
+    title: "Landing Pages Geradas por IA",
+    category: "IA & Automação",
+    text: "Geração de 17 landing pages completas a partir de fichas reais do Google Maps utilizando prompt fixo estruturado.",
+    stack: ["Prompt Engineering", "GEO/SEO", "HTML/CSS/JS"],
+    href: repoUrl("landing-pages-ia-experimento"),
+  },
+  {
+    slug: "Extraindo-Insights-do-Feedback-de-Clientes-Banc-rios",
+    title: "Insights de Feedback de Clientes Bancários",
+    category: "IA & Automação",
+    text: "Classificação automática de feedbacks por tema, sentimento e nível de urgência com geração de resumos executivos acionáveis.",
+    stack: ["Prompt Engineering", "Análise de CX", "NLP"],
+    href: repoUrl("Extraindo-Insights-do-Feedback-de-Clientes-Banc-rios"),
+  },
+  {
+    slug: "dio-educador-financeiro-ia-Santander-bootcamp",
+    title: "Educador Financeiro Inteligente",
+    category: "IA & Automação",
+    text: "Assistente conversacional para planejamento orçamentário universitário, rateio de despesas e simulação de metas de poupança.",
+    stack: ["Prompt Engineering", "Educação Financeira"],
+    href: repoUrl("dio-educador-financeiro-ia-Santander-bootcamp"),
+  },
+  {
+    slug: "Ia-generativa-video",
+    title: "Avatar CGI com IA Generativa",
+    category: "IA & Automação",
+    text: "Produção de vídeo sintético hiper-realista integrando geração de imagem por difusão, roteirização e sincronia labial.",
+    stack: ["IA Generativa de Imagem", "Lip-sync", "Multimodal"],
+    href: repoUrl("Ia-generativa-video"),
+  },
+  {
+    slug: "ERP-Sistema-Gestao-BlogRichard",
+    title: "Sistema de Gestão ERP",
+    category: "Dados & Dashboards",
+    text: "Dashboard de KPIs em tempo real, controle de acessos por perfil (RBAC) e pipeline de validação e sanitização de dados.",
+    stack: ["RBAC", "APIs RESTful", "Dashboard", "SQL"],
+    href: repoUrl("ERP-Sistema-Gestao-BlogRichard"),
+  },
+  {
+    slug: "finance-ai-dashboard",
+    title: "Finance.AI Dashboard",
+    category: "Dados & Dashboards",
+    text: "Protótipo de painel financeiro moderno com arquitetura assíncrona, validação de contratos de dados e estados de carregamento.",
+    stack: ["Next.js", "React", "Recharts", "Tailwind CSS"],
+    href: repoUrl("finance-ai-dashboard"),
+  },
+  {
+    slug: "harvard-cs50-sql",
+    title: "CS50 SQL (Harvard University)",
+    category: "Dados & Dashboards",
+    text: "Modelagem relacional ER, normalização, criação de views, triggers e otimização de consultas complexas através de índices.",
+    stack: ["SQL", "Modelagem ER", "Índices", "Otimização"],
+    href: repoUrl("harvard-cs50-sql"),
+  },
+  {
+    slug: "planej-ai",
+    title: "Planej.ai",
+    category: "Front-end",
+    text: "Plataforma de educação e gestão financeira com arquitetura React pura, componentes modulares e estilização Tailwind v4.",
+    stack: ["React", "TypeScript", "Tailwind v4"],
+    href: repoUrl("planej-ai"),
+  },
+  {
+    slug: "Vitrine-atelie",
+    title: "Ateliê da Paula (Vitrine Virtual)",
+    category: "Front-end",
+    text: "Vitrine de produtos artesanais orientada a conversão via WhatsApp, tipagem estrita em TypeScript e gerenciamento com Zustand.",
+    stack: ["React", "TypeScript", "Zustand", "Tailwind CSS"],
+    href: repoUrl("Vitrine-atelie"),
+  },
+  {
+    slug: "portifolio-web",
+    title: "Portfólio Web Moderno",
+    category: "Front-end",
+    text: "Interface moderna e responsiva em React 19, Vite, TypeScript e Tailwind CSS, apresentando os projetos e métricas de engenharia.",
+    stack: ["React 19", "Vite", "TypeScript", "Tailwind CSS"],
+    href: repoUrl("portifolio-web"),
+  },
+  {
+    slug: "hub-eventos",
+    title: "Hub de Eventos",
+    category: "Front-end",
+    text: "Interface web responsiva para divulgação, catálogo e gerenciamento de inscrições em eventos acadêmicos e corporativos.",
+    stack: ["React", "TypeScript", "Tailwind CSS"],
+    href: repoUrl("hub-eventos"),
+  },
+  {
+    slug: "linktree-playsan",
+    title: "Linktree PlaySan",
+    category: "Front-end",
+    text: "Página centralizadora de canais de atendimento e links institucionais corporativos com foco em carregamento instantâneo.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    href: repoUrl("linktree-playsan"),
+  },
+  {
+    slug: "PlaySan-Sistemas",
+    title: "PlaySan Sistemas",
+    category: "Front-end",
+    text: "Plataforma comercial e institucional desenvolvida para apresentação de soluções de automação e gestão empresarial.",
+    stack: ["React", "JavaScript", "CSS3"],
+    href: repoUrl("PlaySan-Sistemas"),
+  },
+  {
+    slug: "projetofinal-DIO-ransonware",
+    title: "Simulação de Ransomware Educacional",
+    category: "Segurança",
+    text: "Implementação controlada de criptografia e chave de descriptografia em Python com AES, demonstrando vulnerabilidades e mitigação.",
+    stack: ["Python", "Criptografia AES", "Cibersegurança"],
+    href: repoUrl("projetofinal-DIO-ransonware"),
+  },
+  {
+    slug: "Phishing-Kali-senhs",
+    title: "Simulação de Engenharia Social",
+    category: "Segurança",
+    text: "Laboratório controlado de conscientização em segurança da informação utilizando ferramentas do Kali Linux para prevenção de fraudes.",
+    stack: ["Kali Linux", "Pentest", "Conscientização em Segurança"],
+    href: repoUrl("Phishing-Kali-senhs"),
+  },
+];
+
+export const education: EducationItem[] = [
+  {
+    period: "Previsão de conclusão: Dezembro de 2028",
+    title: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+    school: "FATEC",
+  },
+  {
+    period: "Concluído em 2025",
+    title: "Técnico em Informática para a Internet",
+    school: "Etec Prof. Rodolpho José Del Guerra",
+  },
+];
+
+export const certs: string[] = [
+  "CS50’s Introduction to Databases with SQL (Harvard University)",
+  "Bootcamp Santander 2026: Engenharia de Dados & IA (DIO)",
+  "Bootcamp Accenture: Python para Análise e Automação de Dados (DIO)",
+  "Bootcamp Afya: Automação de Dados com IA (DIO)",
+  "Bootcamp Bradesco: GenAI, Dados & Cyber (DIO)",
+  "N8N: Do Zero ao Projeto com IA (UNIP)",
+  "Formação Fundamentos de Inteligência Artificial (DIO)",
+  "Introdução à Cibersegurança (Cisco Networking Academy)",
+];
+
+export const bootLines: BootLine[] = [
+  { prompt: "$", text: "sessão iniciada: rafael boaro", className: "text-slate-200" },
+  { prompt: "", text: "import pandas, sqlite3, sklearn, torch", className: "text-slate-500" },
+  { prompt: "", text: "pipeline etl e previsão ............ concluído", className: "text-slate-500" },
+  { prompt: "", text: "data quality e qa .................. validado", className: "text-slate-500" },
+  { prompt: "", text: "acurácia modelo mnist ............... 95.57%", className: "text-emerald-300" },
+  { prompt: "", text: "cofre estoque inteligente .......... em produção", className: "text-sky-300" },
+  { prompt: "$", text: "agente de ia pronto para consultas", className: "text-fuchsia-300" },
+];
